@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import hh.palvelinohjelmointi.Bookstore.domain.BookRepository;
+import hh.palvelinohjelmointi.Bookstore.domain.Category;
+import hh.palvelinohjelmointi.Bookstore.domain.CategoryReposity;
 import hh.palvelinohjelmointi.Bookstore.domain.Book;
 
 @SpringBootApplication
@@ -19,16 +21,19 @@ public class BookstoreApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository) {
+	public CommandLineRunner bookDemo(BookRepository bookrepository, CategoryReposity categoryreposity) {
 		return (args) -> {
 			log.info("saving books");
-			repository.save(new Book("Harry Potter and the Philosopher's Stone", "J. K. Rowling", 1997, 49559, 15.99));
-			repository.save(new Book("Harry Potter and the Deathly Hallows", "J. K. Rowling", 2009, 39708, 19.99));
-			log.info("fetch the books");
-			for (Book book : repository.findAll()) {
+			categoryreposity.save(new Category("Fantasy"));
+			categoryreposity.save(new Category("Horror"));
+			categoryreposity.save(new Category("Comic book"));
+			bookrepository.save(new Book("Harry Potter and the Philosopher's Stone", "J. K. Rowling", 1997, 2545496, 15.99, categoryreposity.findByName("fantasy").get(0)));
+			bookrepository.save(new Book("Harry Potter and the Deathly Hallows", "J. K. Rowling", 2009, 35649708, 19.99, categoryreposity.findByName("fantasy").get(0)));
+			log.info("fetch all books");
+			for (Book book : bookrepository.findAll()) {
 				log.info(book.toString());
 			}
-		
+	
 		};
 	}
 
