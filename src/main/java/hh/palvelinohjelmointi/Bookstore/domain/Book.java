@@ -1,6 +1,7 @@
 package hh.palvelinohjelmointi.Bookstore.domain;
 
 import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,17 +18,18 @@ public class Book {
 	private String title;
 	private String author;
 	private int year;
-	private int isbn;
+	private String isbn;
 	private double price;
 	
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
+	@JsonIgnore
 	private Category category;
 	
 	public Book() {
 	}
 
-	public Book(String title, String author, int year, int isbn, double price, Category category) {
+	public Book(String title, String author, int year, String isbn, double price, Category category) {
 		super();
 		this.title = title;
 		this.author = author;
@@ -69,11 +71,11 @@ public class Book {
 		this.year = year;
 	}
 
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 
