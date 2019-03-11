@@ -27,8 +27,10 @@ public class BookstoreApplication {
 			categoryrepository.save(new Category("Fantasy"));
 			categoryrepository.save(new Category("Horror"));
 			categoryrepository.save(new Category("Comic book"));
-			bookrepository.save(new Book("Harry Potter and the Philosopher's Stone", "J. K. Rowling", 1997, "2545-45646496", 15.99, categoryrepository.findByName("fantasy").get(0)));
-			bookrepository.save(new Book("Harry Potter and the Deathly Hallows", "J. K. Rowling", 2009, "3564970-65465468", 19.99, categoryrepository.findByName("fantasy").get(0)));
+			bookrepository.save(new Book("Harry Potter and the Philosopher's Stone", "J. K. Rowling", 
+					1997, "2545-45646496", 15.99, categoryrepository.findByName("Fantasy").get(0)));
+			bookrepository.save(new Book("Harry Potter and the Deathly Hallows", "J. K. Rowling", 
+					2009, "3564970-65465468", 19.99, categoryrepository.findByName("Fantasy").get(0)));
 			log.info("fetch all books");
 			for (Book book : bookrepository.findAll()) {
 				log.info(book.toString());

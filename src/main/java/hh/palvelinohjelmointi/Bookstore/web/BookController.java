@@ -28,6 +28,12 @@ public class BookController {
 		return "mainpage";
 	}
 	
+	@RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+
+	
 	@RequestMapping(value="/booklist", method=RequestMethod.GET)
 	public String bookList(Model model) {
 		model.addAttribute("books", bookrepository.findAll());
@@ -63,10 +69,10 @@ public class BookController {
 		return "redirect:../booklist";
 	}
 	
-	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
-	public String addBook(@PathVariable("id") Long id, Model model) {
+	@RequestMapping(value="/editbook/{id}")
+	public String editBook(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("book", bookrepository.findById(id));
-		model.addAttribute("category", categoryrepository.findAll());
+		model.addAttribute("categories", categoryrepository.findAll());
 		return "editbook";
 	}
 	
