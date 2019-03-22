@@ -46,8 +46,8 @@ public class BookController {
 	}
 	
 	@RequestMapping(value="/books/{id}", method=RequestMethod.GET)
-	public @ResponseBody Optional<Book> getBookRest(@PathVariable("id") Long bookId) {
-		return bookrepository.findById(bookId);
+	public @ResponseBody Optional<Book> getBookRest(@PathVariable("id") Long id) {
+		return bookrepository.findById(id);
 	}
 	
 	@RequestMapping(value="/addbook", method=RequestMethod.GET)
